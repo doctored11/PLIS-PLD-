@@ -1,0 +1,15 @@
+|Multiplexer
+Y <= CustomMux:Mux.port0
+X0 => X0.IN1
+X1 => X1.IN1
+A => A.IN1
+
+
+|Multiplexer|CustomMux:Mux
+Y <= Or1.DB_MAX_OUTPUT_PORT_TYPE
+X0 => And1.IN0
+X1 => And2.IN0
+A => And2.IN1
+A => And1.IN1
+
+
