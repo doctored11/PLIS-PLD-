@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Mon Mar 24 16:36:15 2025
+Analysis & Synthesis Status : Successful - Mon Mar 24 21:20:22 2025
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 Revision Name : spiLedController
-Top-level Entity Name : counter
+Top-level Entity Name : spi_master
 Family : Cyclone IV E
-Total logic elements : 15
-    Total combinational functions : 15
-    Dedicated logic registers : 8
-Total registers : 8
-Total pins : 12
+Total logic elements : 45
+    Total combinational functions : 37
+    Dedicated logic registers : 23
+Total registers : 23
+Total pins : 14
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

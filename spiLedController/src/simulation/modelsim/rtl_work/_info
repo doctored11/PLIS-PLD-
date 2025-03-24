@@ -9,52 +9,51 @@ z2
 !i10f 100
 cModel Technology
 Z0 dC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/simulation/modelsim
-vcounter
-Z1 !s110 1742823515
+vspi_master
+Z1 !s110 1742840033
 !i10b 1
-!s100 :F@S`HVR00e:H:OHmdea]0
+!s100 ]OM=@ncnZjMfKY@Z6lTRz2
 Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
-IW^BDPKmKH0e<kVzWj?^mo0
+IF@_gb7gB<[UR<;;TE^EgC1
 Z3 VDg1SIo80bB@j0V0VzS_@n1
 R0
-w1742823368
-8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v
-FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v
+w1742839745
+8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v
+FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v
 !i122 0
-L0 1 19
+L0 11 59
 Z4 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z5 !s108 1742823515.000000
-!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v|
-!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v|
+Z5 !s108 1742840033.000000
+!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v|
 !i113 1
 Z6 o-vlog01compat -work work
 !s92 -vlog01compat -work work +incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src
 Z7 tCvgOpt 0
-vonlyCounter_tb
+vspi_master_tb
 R1
 !i10b 1
-!s100 42eHGz>F1hJcedHB1N@9_3
+!s100 =<T0H=9]3ZIe^UGMTU7VX2
 R2
-IjYa:0SWSz<Rn<D_E<Y`dz1
+I:JW64?>bK^K3OY]OedRW=0
 R3
 R0
-w1742823032
-8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v
-FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v
+w1742840015
+8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spi_master_tb.v
+FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spi_master_tb.v
 !i122 1
-L0 2 68
+L0 2 79
 R4
 r1
 !s85 0
 31
 R5
-!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v|
-!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v|
+!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spi_master_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spi_master_tb.v|
 !i113 1
 R6
 !s92 -vlog01compat -work work +incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim
 R7
-nonly@counter_tb

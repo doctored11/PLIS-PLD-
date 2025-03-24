@@ -1,5 +1,5 @@
 Analysis & Synthesis report for spiLedController
-Mon Mar 24 16:36:15 2025
+Mon Mar 24 21:20:22 2025
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -14,9 +14,12 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
-  9. Post-Synthesis Netlist Statistics for Top Partition
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  9. Inverted Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |spi_master
+ 12. Post-Synthesis Netlist Statistics for Top Partition
+ 13. Elapsed Time Per Partition
+ 14. Analysis & Synthesis Messages
 
 
 
@@ -43,16 +46,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Mar 24 16:36:15 2025       ;
+; Analysis & Synthesis Status        ; Successful - Mon Mar 24 21:20:22 2025       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; spiLedController                            ;
-; Top-level Entity Name              ; counter                                     ;
+; Top-level Entity Name              ; spi_master                                  ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 15                                          ;
-;     Total combinational functions  ; 15                                          ;
-;     Dedicated logic registers      ; 8                                           ;
-; Total registers                    ; 8                                           ;
-; Total pins                         ; 12                                          ;
+; Total logic elements               ; 45                                          ;
+;     Total combinational functions  ; 37                                          ;
+;     Dedicated logic registers      ; 23                                          ;
+; Total registers                    ; 23                                          ;
+; Total pins                         ; 14                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -65,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                           ; Setting            ; Default Value      ;
 +------------------------------------------------------------------+--------------------+--------------------+
-; Top-level entity name                                            ; counter            ; spiLedController   ;
+; Top-level entity name                                            ; spi_master         ; spiLedController   ;
 ; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
@@ -162,13 +165,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                  ; Library ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------------------------------------------+---------+
-; counter.v                        ; yes             ; User Verilog HDL File  ; C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v ;         ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                   ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                     ; Library ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------+---------+
+; spi_master.v                     ; yes             ; User Verilog HDL File  ; C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v ;         ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -176,30 +179,30 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 15        ;
+; Estimated Total logic elements              ; 45        ;
 ;                                             ;           ;
-; Total combinational functions               ; 15        ;
+; Total combinational functions               ; 37        ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 6         ;
+;     -- 4 input functions                    ; 20        ;
 ;     -- 3 input functions                    ; 6         ;
-;     -- <=2 input functions                  ; 3         ;
+;     -- <=2 input functions                  ; 11        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 8         ;
+;     -- normal mode                          ; 30        ;
 ;     -- arithmetic mode                      ; 7         ;
 ;                                             ;           ;
-; Total registers                             ; 8         ;
-;     -- Dedicated logic registers            ; 8         ;
+; Total registers                             ; 23        ;
+;     -- Dedicated logic registers            ; 23        ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
-; I/O pins                                    ; 12        ;
+; I/O pins                                    ; 14        ;
 ;                                             ;           ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
-; Maximum fan-out node                        ; always0~0 ;
-; Maximum fan-out                             ; 8         ;
-; Total fan-out                               ; 100       ;
-; Average fan-out                             ; 2.13      ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 23        ;
+; Total fan-out                               ; 221       ;
+; Average fan-out                             ; 2.51      ;
 +---------------------------------------------+-----------+
 
 
@@ -208,7 +211,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
-; |counter                   ; 15 (15)             ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 12   ; 0            ; |counter            ; counter     ; work         ;
+; |spi_master                ; 37 (37)             ; 23 (23)                   ; 0           ; 0            ; 0       ; 0         ; 14   ; 0            ; |spi_master         ; spi_master  ; work         ;
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -218,14 +221,47 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 8     ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 23    ;
+; Number of registers using Synchronous Clear  ; 8     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 8     ;
+; Number of registers using Asynchronous Clear ; 15    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 8     ;
+; Number of registers using Clock Enable       ; 16    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; SS~reg0                                ; 2       ;
+; bit_index[1]                           ; 9       ;
+; bit_index[0]                           ; 10      ;
+; bit_index[2]                           ; 6       ;
+; Total number of inverted registers = 4 ;         ;
++----------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |spi_master|clk_counter[7] ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |spi_master|bit_index[2]   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |spi_master ;
++-------------------+-------+------------------------------------------------+
+; Parameter Name    ; Value ; Type                                           ;
++-------------------+-------+------------------------------------------------+
+; CLKS_PER_HALF_BIT ; 25    ; Signed Integer                                 ;
++-------------------+-------+------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +-----------------------------------------------------+
@@ -233,19 +269,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 12                          ;
-; cycloneiii_ff         ; 8                           ;
-;     ENA CLR           ; 8                           ;
-; cycloneiii_lcell_comb ; 15                          ;
+; boundary_port         ; 14                          ;
+; cycloneiii_ff         ; 23                          ;
+;     CLR               ; 7                           ;
+;     ENA               ; 8                           ;
+;     ENA CLR SCLR      ; 8                           ;
+; cycloneiii_lcell_comb ; 38                          ;
 ;     arith             ; 7                           ;
-;         2 data inputs ; 1                           ;
+;         2 data inputs ; 7                           ;
+;     normal            ; 31                          ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 3                           ;
 ;         3 data inputs ; 6                           ;
-;     normal            ; 8                           ;
-;         2 data inputs ; 2                           ;
-;         4 data inputs ; 6                           ;
+;         4 data inputs ; 20                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 3.60                        ;
-; Average LUT depth     ; 2.98                        ;
+; Max LUT depth         ; 5.00                        ;
+; Average LUT depth     ; 2.87                        ;
 +-----------------------+-----------------------------+
 
 
@@ -264,36 +303,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Mon Mar 24 16:36:09 2025
+    Info: Processing started: Mon Mar 24 18:51:00 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off spiLedController -c spiLedController
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 10 of the 10 processors detected
-Info (12021): Found 1 design units, including 1 entities, in source file counter.v
-    Info (12023): Found entity 1: counter File: C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file memory.v
-    Info (12023): Found entity 1: memory File: C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/memory.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file spi_master.v
-    Info (12023): Found entity 1: spi_master File: C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file spiledcontroller.v
-    Info (12023): Found entity 1: spiLedController File: C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spiLedController.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /users/turboed/desktop/git/gitplis/plis-pld-/spiledcontroller/sim/spiledcontroller_tb.v
-    Info (12023): Found entity 1: spiLedController_tb File: C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/sim/spiLedController_tb.v Line: 2
-Info (12021): Found 1 design units, including 1 entities, in source file /users/turboed/desktop/git/gitplis/plis-pld-/spiledcontroller/sim/onlycounter_tb.v
-    Info (12023): Found entity 1: onlyCounter_tb File: C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/sim/onlyCounter_tb.v Line: 2
-Info (12127): Elaborating entity "counter" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at counter.v(13): truncated value with size 32 to match size of target (8) File: C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v Line: 13
-Warning (10230): Verilog HDL assignment warning at counter.v(15): truncated value with size 32 to match size of target (8) File: C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v Line: 15
-Info (286030): Timing-Driven Synthesis is running
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 27 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 4 input pins
-    Info (21059): Implemented 8 output pins
-    Info (21061): Implemented 15 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 4812 megabytes
-    Info: Processing ended: Mon Mar 24 16:36:15 2025
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:13
 
 

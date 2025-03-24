@@ -4,35 +4,15 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "val[0]",
+					"name" : "SCLK",
 					"strict" : false
 				},
 				{
-					"name" : "val[1]",
+					"name" : "MOSI",
 					"strict" : false
 				},
 				{
-					"name" : "val[2]",
-					"strict" : false
-				},
-				{
-					"name" : "val[3]",
-					"strict" : false
-				},
-				{
-					"name" : "val[4]",
-					"strict" : false
-				},
-				{
-					"name" : "val[5]",
-					"strict" : false
-				},
-				{
-					"name" : "val[6]",
-					"strict" : false
-				},
-				{
-					"name" : "val[7]",
+					"name" : "SS",
 					"strict" : false
 				},
 				{
@@ -44,11 +24,39 @@
 					"strict" : false
 				},
 				{
-					"name" : "inc",
+					"name" : "start",
 					"strict" : false
 				},
 				{
-					"name" : "dec",
+					"name" : "data[7]",
+					"strict" : false
+				},
+				{
+					"name" : "data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "data[3]",
+					"strict" : false
+				},
+				{
+					"name" : "data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "data[5]",
+					"strict" : false
+				},
+				{
+					"name" : "data[6]",
+					"strict" : false
+				},
+				{
+					"name" : "data[4]",
 					"strict" : false
 				}
 			]

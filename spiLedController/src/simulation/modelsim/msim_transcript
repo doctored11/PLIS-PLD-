@@ -10,33 +10,33 @@
 # Copying C:/intelFPGA/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -vlog01compat -work work +incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src {C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v}
+# vlog -vlog01compat -work work +incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src {C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 16:38:35 on Mar 24,2025
-# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src" C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v 
-# -- Compiling module counter
+# Start time: 21:13:53 on Mar 24,2025
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src" C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v 
+# -- Compiling module spi_master
 # 
 # Top level modules:
-# 	counter
-# End time: 16:38:35 on Mar 24,2025, Elapsed time: 0:00:00
+# 	spi_master
+# End time: 21:13:53 on Mar 24,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vlog -vlog01compat -work work +incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim {C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v}
+# vlog -vlog01compat -work work +incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim {C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spi_master_tb.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 16:38:35 on Mar 24,2025
-# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim" C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v 
-# -- Compiling module onlyCounter_tb
+# Start time: 21:13:53 on Mar 24,2025
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim" C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spi_master_tb.v 
+# -- Compiling module spi_master_tb
 # 
 # Top level modules:
-# 	onlyCounter_tb
-# End time: 16:38:35 on Mar 24,2025, Elapsed time: 0:00:00
+# 	spi_master_tb
+# End time: 21:13:53 on Mar 24,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  onlyCounter_tb
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=""+acc"" onlyCounter_tb 
-# Start time: 16:38:35 on Mar 24,2025
-# Loading work.onlyCounter_tb
-# Loading work.counter
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  spi_master_tb
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=""+acc"" spi_master_tb 
+# Start time: 21:13:53 on Mar 24,2025
+# Loading work.spi_master_tb
+# Loading work.spi_master
 # 
 # add wave *
 # view structure
@@ -44,47 +44,37 @@
 # view signals
 # .main_pane.objects.interior.cs.body.tree
 # run -all
-# --- 
 # 
-# val = 2
-# val = 4
-# val = 6
-# val = 8
-# val = 10
+#  start
 # 
-#  +++ 
+# Test 0: Sending 0xfa (11111010)
+# Received: 0xfa (11111010)
+# PASS: Data matched
 # 
-# val = 8
-# val = 6
-# val = 4
+# Test 1: Sending 0x03 (00000011)
+# Received: 0x03 (00000011)
+# PASS: Data matched
 # 
-#  Gran sluchai=)
-# after -decrement val=0: 0
-# after 300 +increments = 255
-# ** Note: $stop    : C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v(66)
-#    Time: 7220 ns  Iteration: 0  Instance: /onlyCounter_tb
-# Break in Module onlyCounter_tb at C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v line 66
-restart -f
-run -all
-# --- 
+# Test 2: Sending 0x08 (00001000)
+# Received: 0x08 (00001000)
+# PASS: Data matched
 # 
-# val = 2
-# val = 4
-# val = 6
-# val = 8
-# val = 10
+# Test 3: Sending 0xaa (10101010)
+# Received: 0xaa (10101010)
+# PASS: Data matched
 # 
-#  +++ 
+# Test 4: Sending 0x55 (01010101)
+# Received: 0x55 (01010101)
+# PASS: Data matched
 # 
-# val = 8
-# val = 6
-# val = 4
+# Test 5: Sending 0xff (11111111)
+# Received: 0xff (11111111)
+# PASS: Data matched
 # 
-#  Gran sluchai=)
-# after -decrement val=0: 0
-# after 300 +increments = 255
-# ** Note: $stop    : C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v(66)
-#    Time: 7220 ns  Iteration: 0  Instance: /onlyCounter_tb
-# Break in Module onlyCounter_tb at C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/onlyCounter_tb.v line 66
-# End time: 16:39:33 on Mar 24,2025, Elapsed time: 0:00:58
+# All tests PASSED!
+# ** Note: $finish    : C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spi_master_tb.v(48)
+#    Time: 48910 ns  Iteration: 0  Instance: /spi_master_tb
+# 1
+# Break in Module spi_master_tb at C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spi_master_tb.v line 48
+# End time: 21:22:35 on Mar 24,2025, Elapsed time: 0:08:42
 # Errors: 0, Warnings: 0
