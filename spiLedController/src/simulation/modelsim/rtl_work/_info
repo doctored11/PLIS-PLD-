@@ -1,0 +1,133 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/simulation/modelsim
+vcounter
+Z1 !s110 1742815899
+!i10b 1
+!s100 m;Id5AVB?zJW?3Ni<fCSL1
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IR]XOo<;@RF@^Z0V]OzoWF3
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1742814801
+8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v
+FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v
+!i122 0
+L0 1 21
+Z4 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z5 !s108 1742815899.000000
+!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/counter.v|
+!i113 1
+Z6 o-vlog01compat -work work
+Z7 !s92 -vlog01compat -work work +incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src
+Z8 tCvgOpt 0
+vmemory
+R1
+!i10b 1
+!s100 gjKj4VR5@OOnfEUJS114h1
+R2
+IZYCmDJzjUo:6lG=hJhcf]2
+R3
+R0
+w1742814796
+8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/memory.v
+FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/memory.v
+!i122 1
+L0 1 13
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/memory.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/memory.v|
+!i113 1
+R6
+R7
+R8
+vspi_master
+R1
+!i10b 1
+!s100 kIKCBn4fZj==RcaT[AB1S1
+R2
+IbP9aezV<l5lFYX:cCE7]D2
+R3
+R0
+w1742814806
+8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v
+FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v
+!i122 2
+L0 1 31
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spi_master.v|
+!i113 1
+R6
+R7
+R8
+vspiLedController
+R1
+!i10b 1
+!s100 J=nL:AX]VU2`7h[KN=1ME3
+R2
+I7MKO4GiNJUzHgXIoA>0Nm1
+R3
+R0
+w1742814710
+8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spiLedController.v
+FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spiLedController.v
+!i122 3
+L0 1 38
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spiLedController.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/spiLedController.v|
+!i113 1
+R6
+R7
+R8
+nspi@led@controller
+vspiLedController_tb
+R1
+!i10b 1
+!s100 BSP55mzf;=:O`R4=GfjIl0
+R2
+I6e>:c7Ekd414HDc9o8o_G1
+R3
+R0
+w1742814766
+8C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spiLedController_tb.v
+FC:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spiLedController_tb.v
+!i122 4
+L0 2 56
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spiLedController_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim|C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim/spiLedController_tb.v|
+!i113 1
+R6
+!s92 -vlog01compat -work work +incdir+C:/Users/turboEd/Desktop/git/gitPlis/PLIS-PLD-/spiLedController/src/../sim
+R8
+nspi@led@controller_tb

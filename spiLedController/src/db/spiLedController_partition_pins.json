@@ -1,0 +1,33 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "SCLK",
+					"strict" : false
+				},
+				{
+					"name" : "MOSI",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "inc",
+					"strict" : false
+				},
+				{
+					"name" : "dec",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
