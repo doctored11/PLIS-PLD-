@@ -4,11 +4,35 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "SCLK",
+					"name" : "val[0]",
 					"strict" : false
 				},
 				{
-					"name" : "MOSI",
+					"name" : "val[1]",
+					"strict" : false
+				},
+				{
+					"name" : "val[2]",
+					"strict" : false
+				},
+				{
+					"name" : "val[3]",
+					"strict" : false
+				},
+				{
+					"name" : "val[4]",
+					"strict" : false
+				},
+				{
+					"name" : "val[5]",
+					"strict" : false
+				},
+				{
+					"name" : "val[6]",
+					"strict" : false
+				},
+				{
+					"name" : "val[7]",
 					"strict" : false
 				},
 				{

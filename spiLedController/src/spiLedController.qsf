@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE AUTO
-set_global_assignment -name TOP_LEVEL_ENTITY spiLedController
+set_global_assignment -name TOP_LEVEL_ENTITY counter
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:08:02  MARCH 24, 2025"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.0 Lite Edition"
@@ -48,17 +48,22 @@ set_global_assignment -name VERILOG_FILE counter.v
 set_global_assignment -name VERILOG_FILE memory.v
 set_global_assignment -name VERILOG_FILE spi_master.v
 set_global_assignment -name VERILOG_FILE spiLedController.v
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name VERILOG_FILE ../sim/spiLedController_tb.v
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH spiLedController_tb -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH onlyCounter_tb -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME spiLedController_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id spiLedController_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME spiLedController_tb -section_id spiLedController_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE ../sim/spiLedController_tb.v -section_id spiLedController_tb
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VERILOG_FILE ../sim/onlyCounter_tb.v
+set_global_assignment -name EDA_TEST_BENCH_NAME onlyCounter_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id onlyCounter_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME onlyCounter_tb -section_id onlyCounter_tb
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name EDA_TEST_BENCH_FILE ../sim/spiLedController_tb.v -section_id spiLedController_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE ../sim/onlyCounter_tb.v -section_id onlyCounter_tb
