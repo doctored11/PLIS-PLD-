@@ -1,0 +1,37 @@
+module diodController(
+    input clk,           // 50 MHz
+    input reset,         // Асинхронный сброс
+    input start,         // Начало работы
+    input noise_valid,   // Подтверждённый шум
+    output spi_mosi,     // Выходные данные SPI
+    output spi_clk,      // Тактовый сигнал SPI
+    output spi_cs        // Chip Select (CS) для SPI
+);
+
+    // Сигналы для связи между модулями
+    wire [7:0] voltage;
+    wire spi_start;
+    wire store_en;
+
+    // Экземпляр счетчика
+    counter cnt (
+        .clk(clk),
+        .reset(reset),
+        .start(start),
+        .noise_valid(noise_valid),
+        .voltage(voltage),
+        .spi_start(spi_start),
+        .store_en(store_en)
+    );
+
+    // Экземпляр SPI модуля
+    spi_module spi (
+        .clk(clk),
+        .start(spi_start),
+        .data(voltage),
+        .mosi(spi_mosi),
+        .sck(spi_clk),
+        .cs(spi_cs)
+    );
+
+endmodule

@@ -1,0 +1,5 @@
+*.vcd
+simulation/modelsim/*.vcd
+diodController/simulation/*
+diodController/output_files/*
+diodController/db/*

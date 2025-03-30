@@ -1,0 +1,66 @@
+module spi_module(
+    input clk,         // Тактовый сигнал системы
+    input reset,       // Сброс (активный высокий)
+    input start,       // Сигнал начала передачи
+    input [7:0] data,  // Данные для передачи
+    output reg SCLK = 0,  // SPI тактовый сигнал
+    output reg MOSI = 0,  // Выходные данные
+    output reg SS = 1     // Сигнал выбора устройства (активный низкий)
+);
+    parameter CLKS_PER_HALF_BIT = 2;  // полупериод SCLK = 2 тика clk || (T=4)
+    
+    reg [7:0] clk_counter = 0;
+    reg [2:0] bit_index = 0;  // Индекс текущего бита (0-7)
+    reg [7:0] tx_data;
+    reg tx_active = 0;
+
+    
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Сброс всех регистров
+            SCLK <= 0;
+            MOSI <= 0;
+            SS <= 1;
+            clk_counter <= 0;
+            bit_index <= 0;
+            tx_active <= 0;
+       
+        end else begin
+            if (start && !tx_active) begin
+                // начало передачи 
+                tx_active <= 1;
+                SS <= 0;         
+                tx_data <= data;  
+                bit_index <= 7;   
+                clk_counter <= 0;
+                MOSI <= data[7];  
+                SCLK <= 0;       
+               
+            end 
+            else if (tx_active) begin
+                clk_counter <= clk_counter + 1;
+                
+                if (clk_counter == CLKS_PER_HALF_BIT - 1) begin
+                    // Переключение фазы SCLK
+                   
+                    SCLK <= ~SCLK;
+                    clk_counter <= 0;
+                    
+                    if (SCLK) begin
+                        // Вторая половина периода (спадающий фронт)
+                        // Подготовка следующего бита
+                        if (bit_index > 0) begin
+                            bit_index <= bit_index - 1;
+                            MOSI <= tx_data[bit_index - 1];
+                        end else begin
+                            // Все биты переданы
+                            tx_active <= 0;
+                            SS <= 1;    // Деактивируем устройство
+                            MOSI <= 0;
+                        end
+                    end
+                end
+            end
+        end
+    end
+endmodule

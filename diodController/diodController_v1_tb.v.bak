@@ -1,0 +1,65 @@
+module diodController_v1_tb;
+
+    reg clk;
+    reg reset;
+    reg start;
+    reg noise_valid;
+    wire spi_mosi;
+    wire spi_clk;
+    wire spi_cs;
+    
+    // Экземпляр тестируемого модуля
+    diodController uut (
+        .clk(clk),
+        .reset(reset),
+        .start(start),
+        .noise_valid(noise_valid),
+        .spi_mosi(spi_mosi),
+        .spi_clk(spi_clk),
+        .spi_cs(spi_cs)
+    );
+
+    // Генерация тактового сигнала 50 МГц (период 20 нс)
+    always #10 clk = ~clk;
+
+    initial begin
+        // Инициализация сигналов
+        clk = 0;
+        reset = 1;
+        start = 0;
+        noise_valid = 0;
+
+        // Подключение к файлу для отладки
+        $dumpfile("diodController.vcd");
+        $dumpvars(0, diodController_tb);
+
+        // Сброс
+        #100 reset = 0;
+        #100 start = 1;
+        #100 start = 0;
+
+        // Ждем, пока voltage ≈ 122
+        #46360000; // 46.36 ms
+
+        // Подаем шум три раза подряд
+        noise_valid = 1;
+        #115000;
+        noise_valid = 1;
+        #115000;
+        noise_valid = 1;
+        #115000;
+        noise_valid = 0;
+
+        // Даем системе немного времени, чтобы убедиться, что напряжение больше не растет
+        #2000000;
+
+        $finish;
+    end
+
+    // Мониторинг сигналов
+    initial begin
+        $monitor("Time = %t ns | Voltage = %d | SPI_MOSI = %b | SPI_CS = %b", 
+                 $time, uut.cnt.voltage, spi_mosi, spi_cs);
+    end
+
+endmodule

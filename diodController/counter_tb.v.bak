@@ -1,0 +1,58 @@
+module counter_tb;
+
+    // Определяем сигналы
+    reg clk;
+    reg reset;
+    reg start;
+    reg noise_valid;
+    wire [7:0] voltage;
+    wire spi_start;
+    wire store_en;
+
+    // Подключаем тестируемый модуль
+    counter uut (
+        .clk(clk),
+        .reset(reset),
+        .start(start),
+        .noise_valid(noise_valid),
+        .voltage(voltage),
+        .spi_start(spi_start),
+        .store_en(store_en)
+    );
+
+    // Генерация тактового сигнала 50 МГц
+    always #10 clk = ~clk;  // Период 20 нс (50 МГц)
+
+    initial begin
+        // Инициализация сигналов
+        clk = 0;
+        reset = 1;
+        start = 0;
+        noise_valid = 0;
+
+        // Сброс
+        #50 reset = 0;  
+        #50 start = 1;  // Запуск FSM
+        #50 start = 0;
+
+        // Имитация нормальной работы без шума
+        #50000;
+        noise_valid = 1; // Шум обнаружен
+        #1150;
+        noise_valid = 0; // Шум исчез
+        #1150;
+        noise_valid = 1; // Шум снова обнаружен
+
+        // Даем FSM поработать
+        #200000;
+        
+        $finish; // Завершить симуляцию
+    end
+
+    // Мониторинг сигналов
+    initial begin
+        $monitor("Time = %t | Voltage = %d | SPI = %b | Store = %b", 
+                 $time, voltage, spi_start, store_en);
+    end
+
+endmodule
