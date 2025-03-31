@@ -24,7 +24,7 @@ parameter IDLE       = 0;
 parameter INIT       = 1;
 parameter INCREASE   = 2;
 parameter PAUSE      = 3;
-parameter CHECK_NOISE= 4;
+parameter CHECK_NOISE = 4;
 parameter CONFIRM    = 5;
 parameter CALIBRATE  = 6;
 
@@ -85,25 +85,27 @@ always @(posedge clk or posedge reset) begin
                 end
             end
                 
-            CHECK_NOISE: begin 
-                if (timer >= DELAY_115_TICKS - 1) begin
-                    timer <= 0;
-                    if (noise_valid) begin
-                        noise_check_count <= noise_check_count + 1; 
-                        if (noise_check_count >= 3) begin
-                            store_en <= 1;
-                            state <= CALIBRATE;
-									 
-									 spi_start <= 1;
-                        end else begin
-                            state <= INCREASE; 
-                        end
-                    end else begin
-                        noise_check_count <= 0; 
+					 CHECK_NOISE: begin 
+					  spi_start <= 0;
+                if (timer < DELAY_115_TICKS - 1) begin
+                    timer <= timer + 1;
+                    
+                    if (noise_valid == 0) begin
+                        noise_check_count <= 0;
                         state <= INCREASE;
                     end
                 end else begin
-                    timer <= timer + 1;
+                    timer <= 0;
+                    noise_check_count <= noise_check_count + 1;
+                    spi_start <= 1;
+						  
+                    if (noise_check_count > 2) begin  
+                        store_en <= 1;
+                        state <= CALIBRATE;
+                        
+                    end else begin
+//                        state <= INCREASE;
+                    end
                 end
             end
             

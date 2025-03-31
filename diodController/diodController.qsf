@@ -73,10 +73,10 @@ set_global_assignment -name VERILOG_FILE diodController_v1_tb.v
 set_global_assignment -name EDA_TEST_BENCH_NAME diodController_v1_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id diodController_v1_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME diodController_v1_tb -section_id diodController_v1_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE spi_tb.v -section_id spi_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE counter_tb.v -section_id counter_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE diodController_v1_tb.v -section_id diodController_v1_tb
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name EDA_TEST_BENCH_FILE spi_tb.v -section_id spi_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE counter_tb.v -section_id counter_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE diodController_v1_tb.v -section_id diodController_v1_tb
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
