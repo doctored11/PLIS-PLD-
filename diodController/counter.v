@@ -5,7 +5,7 @@ module counter(
     input         noise_valid,   
     output reg [7:0] voltage,    
     output reg    spi_start,     
-    output reg    store_en,
+    output reg    varu,
     output [1:0] debug_window_count,
     output reg [2:0] debug_state
 );
@@ -46,14 +46,15 @@ always @(posedge clk or posedge reset) begin
         timer <= 0;
         noise_check_count <= 0;
         spi_start <= 0;
-        store_en <= 0;
+    
         noise_heard_in_window <= 0;
         window_count <= 0;
         prev_noise_valid <= 0;
         prev_noise_heard_in_window <= 0;  
         debug_state <= IDLE;
+		  varu <= 1;
     end else begin
-        store_en <= 0; 
+        varu <= 0; 
         spi_start <= 0;
         debug_state <= state;
         
@@ -127,7 +128,7 @@ always @(posedge clk or posedge reset) begin
                     prev_noise_heard_in_window <= noise_heard_in_window;  
 
                     if (window_count >= 3) begin
-                        store_en <= 1;
+                        varu <= 1;
                         state <= CALIBRATE;
                     end else begin
                         state <= INCREASE;
@@ -136,7 +137,7 @@ always @(posedge clk or posedge reset) begin
             end
 
             CALIBRATE: begin
-                store_en <= 1;
+                varu <= 1;
                 if (reset) begin
                     state <= IDLE;
                 end

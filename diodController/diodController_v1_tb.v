@@ -12,7 +12,7 @@ module diodController_v1_tb;
     wire spi_ss;
     wire [7:0] debug_voltage;
     wire spi_start;
-    wire store_en;
+    wire varu;
     wire [1:0] debug_window_count;
     wire [2:0] debug_state;
 
@@ -26,12 +26,13 @@ module diodController_v1_tb;
         .spi_ss(spi_ss),
         .debug_voltage(debug_voltage),
         .spi_start(spi_start),
-        .store_en(store_en),
+        .varu(varu),
         .debug_window_count(debug_window_count),
         .debug_state(debug_state)
     );
 
-    always #5 clk = ~clk;
+    //always #10 clk = ~clk;//50Мгц - константы выставлены под эту частоту Todo - потом поменять для размера окон по ТЗ
+	 always #5  clk = ~clk;//ошибся -тест делал для этой чатсоты (пограничные состояния и тд)
 
     // функция Шума в течении времени
     task generate_noise(input integer duration_ns);
@@ -87,26 +88,31 @@ module diodController_v1_tb;
 
         #150000;
         generate_burst_noise(5, 20, 30);
-        #150000;
+        #151500;
 
         generate_burst_noise(10, 20, 20);
         #1000000;
         generate_burst_noise(20, 10, 10);
         noise_valid = 0;
         #30000;
+		  
+        generate_burst_noise(40, 5, 10);
+		  #10;
+		  noise_valid = 0;
+		  #3000;
         generate_burst_noise(20, 1, 1);
         noise_valid = 0;
         #30000;
         generate_burst_noise(20, 1, 10);
         noise_valid = 0;
-        #90000;
+        #90500;
         generate_burst_noise(20, 5, 50);
         noise_valid = 0;
         #1000000;
 
         generate_burst_noise(200, 10, 10);
         noise_valid = 0;
-        #300000;
+        #305000;
         generate_burst_noise(20, 10, 10);
         noise_valid = 0;
         #9000;
@@ -116,11 +122,48 @@ module diodController_v1_tb;
         noise_valid = 0;
         #150000;
 
-        generate_noise(100000);
-        #3000;
+        generate_noise(1000000);
+		  noise_valid = 0;
+        #305050;
+		  #102
+		  generate_noise(1000000);
         noise_valid = 1;
+        #30000;
+		  
+		  //второй "круг"
+		 reset = 1;
+        #20;
+        reset = 0;
+        #20;
+        start = 1;
+        #20;
+        start = 0;
+		  
+		  noise_valid = 0;
+        #3000;
+		  
+        generate_burst_noise(40, 5, 10);
+		  #10;
+		  noise_valid = 0;
+		  #3000;
+        generate_burst_noise(20, 1, 1);
+        noise_valid = 0;
+        #30000;
+        generate_burst_noise(20, 1, 10);
+        noise_valid = 0;
+        #90500;
+        generate_burst_noise(20, 5, 50);
+        noise_valid = 0;
+        #10000;
 
-        #300000000;
+        generate_burst_noise(200, 10, 10);
+        noise_valid = 0;
+        #305000;
+        generate_burst_noise(20, 10, 10);
+        noise_valid = 0;
+        #9000;
+        generate_noise(50000);
+        #300000;
 
         $display("End simulation");
         $finish;

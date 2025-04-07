@@ -7,7 +7,7 @@ module counter_tb;
 
     wire [7:0] voltage;
     wire spi_start;
-    wire store_en;
+    wire varu;
     wire [1:0] debug_window_count;
     wire [2:0] debug_state;
 
@@ -18,7 +18,7 @@ module counter_tb;
         .noise_valid(noise_valid),
         .voltage(voltage),
         .spi_start(spi_start),
-        .store_en(store_en),
+        .varu(varu),
         .debug_window_count(debug_window_count),
         .debug_state(debug_state)
     );

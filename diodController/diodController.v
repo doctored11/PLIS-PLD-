@@ -9,25 +9,29 @@ module diodController(
     output spi_ss,
     output [7:0] debug_voltage,
     output spi_start,
-    output store_en,
+    output varu,
     output [1:0] debug_window_count,
     output [2:0] debug_state   
 );
 
     wire [7:0] voltage;
     wire spi_start_int;
-    wire store_en_int;
+    wire varu_int;
     wire [1:0] debug_window_count_internal;
     wire [2:0] debug_state_internal; 
 
+	 
+	 //?todo - отказаться от отдельного reset (сбрасывать по старту)
+	 //todo - старт к счетчику по блоку SPI при MISO =1
     counter cnt (
         .clk(clk),
         .reset(reset),
         .start(start),
         .noise_valid(noise_valid),
+		  
         .voltage(voltage),
         .spi_start(spi_start_int),
-        .store_en(store_en_int),
+        .varu(varu_int),
         .debug_window_count(debug_window_count_internal),
         .debug_state(debug_state_internal)  
     );
@@ -44,7 +48,7 @@ module diodController(
 
     assign debug_voltage = voltage;
     assign spi_start = spi_start_int;
-    assign store_en = store_en_int;
+    assign varu = varu_int;
     assign debug_window_count = debug_window_count_internal;
     assign debug_state = debug_state_internal; 
 endmodule
