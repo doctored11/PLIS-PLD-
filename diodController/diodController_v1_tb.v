@@ -1,94 +1,129 @@
-`timescale 1ns / 1ps
+`timescale 1ns/1ps
 
 module diodController_v1_tb;
+
     reg clk = 0;
-    reg reset = 0;
+    reg reset = 1;
     reg start = 0;
     reg noise_valid = 0;
-    wire [7:0] voltage;
+
+    wire spi_mosi;
+    wire spi_clk;
+    wire spi_ss;
+    wire [7:0] debug_voltage;
     wire spi_start;
     wire store_en;
     wire [1:0] debug_window_count;
+    wire [2:0] debug_state;
 
-    // Instantiate DUT
-    counter dut (
+    diodController uut (
         .clk(clk),
         .reset(reset),
         .start(start),
         .noise_valid(noise_valid),
-        .voltage(voltage),
+        .spi_mosi(spi_mosi),
+        .spi_clk(spi_clk),
+        .spi_ss(spi_ss),
+        .debug_voltage(debug_voltage),
         .spi_start(spi_start),
         .store_en(store_en),
-        .debug_window_count(debug_window_count)
+        .debug_window_count(debug_window_count),
+        .debug_state(debug_state)
     );
 
-    // Clock generation: 50MHz
-    always #10 clk = ~clk;
+    always #5 clk = ~clk;
 
-    // Task to print status
-    task print_status;
-        $display("Time = %10t | Voltage = %02h | Window Count = %0d | StoreEn = %0d | SPI Start = %0d",
-                 $time, voltage, debug_window_count, store_en, spi_start);
-    endtask
-
-    // Helper to wait for a packet cycle and inject noise
-    task packet_with_noise(input integer noise_time_offset);
+    // функция Шума в течении времени
+    task generate_noise(input integer duration_ns);
         integer i;
+        integer pulses;
         begin
-            for (i = 0; i < 19000 + 250 + noise_time_offset; i = i + 1)
-                @(posedge clk);
-
-            noise_valid = 1;
-            @(posedge clk);
-            noise_valid = 0;
-
-            for (i = noise_time_offset + 1; i < 5750; i = i + 1)
-                @(posedge clk);
+            pulses = duration_ns / 20;
+            for (i = 0; i < pulses; i = i + 1) begin
+                noise_valid = 1;
+                #5;
+                noise_valid = 0;
+                #15;
+            end
         end
     endtask
 
-    // Helper to run a packet with no noise
-    task packet_no_noise;
+    // количество Шумов, их ширина и паузы между ними
+    task generate_burst_noise(
+        input integer count,
+        input integer pulse_width_ns,
+        input integer gap_ns
+    );
+        integer i;
         begin
-            repeat (19000 + 250 + 5750) @(posedge clk);
+            for (i = 0; i < count; i = i + 1) begin
+                noise_valid = 1;
+                #(pulse_width_ns);
+                noise_valid = 0;
+                #(gap_ns);
+            end
         end
     endtask
 
     initial begin
-        $display("Starting 5-packet noise timing test...");
-        reset = 1;
-        #100;
-        reset = 0;
+        $display("Start simulation");
+        $dumpfile("diodController_tb.vcd");
+        $dumpvars(0, diodController_v1_tb);
 
+        reset = 1;
+        #20;
+        reset = 0;
+        #20;
         start = 1;
         #20;
         start = 0;
 
-        // Packet 1: noise near end of window
-        $display("# Packet 1: noise at END of window");
-        packet_with_noise(5700);
+        noise_valid = 0;
+        #10;
 
-        // Packet 2: noise at start of window
-        $display("# Packet 2: noise at START of window");
-        packet_with_noise(10);
+        #100000;
+        generate_noise(10000); 
+        noise_valid = 0;
 
-        // Packet 3: no noise
-        $display("# Packet 3: NO noise");
-        packet_no_noise();
+        #150000;
+        generate_burst_noise(5, 20, 30);
+        #150000;
 
-        // Packet 4: noise at START
-        $display("# Packet 4: noise at START of window");
-        packet_with_noise(20);
+        generate_burst_noise(10, 20, 20);
+        #1000000;
+        generate_burst_noise(20, 10, 10);
+        noise_valid = 0;
+        #30000;
+        generate_burst_noise(20, 1, 1);
+        noise_valid = 0;
+        #30000;
+        generate_burst_noise(20, 1, 10);
+        noise_valid = 0;
+        #90000;
+        generate_burst_noise(20, 5, 50);
+        noise_valid = 0;
+        #1000000;
 
-        // Packet 5: noise at END
-        $display("# Packet 5: noise at END of window");
-        packet_with_noise(5600);
+        generate_burst_noise(200, 10, 10);
+        noise_valid = 0;
+        #300000;
+        generate_burst_noise(20, 10, 10);
+        noise_valid = 0;
+        #9000;
+        generate_noise(50000);
+        #300000;
+        generate_burst_noise(20, 10, 10);
+        noise_valid = 0;
+        #150000;
 
-        $display("Ending 5-packet test.");
+        generate_noise(100000);
+        #3000;
+        noise_valid = 1;
+
+        #300000000;
+
+        $display("End simulation");
         $finish;
     end
 
-    always @(posedge clk) begin
-        print_status();
-    end
 endmodule

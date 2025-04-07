@@ -1,7 +1,7 @@
 module counter(
     input         clk,           
     input         reset,         
-    input         start,        
+    input         start,    // переход от idle к init -- мб сделать внутренней переменной    
     input         noise_valid,   
     output reg [7:0] voltage,    
     output reg    spi_start,     
@@ -104,9 +104,10 @@ always @(posedge clk or posedge reset) begin
                 
                 if (timer == 0)
                     noise_heard_in_window <= 0;  
+						  noise_check_count <= 0; 
 
                 if (noise_valid) begin
-                    noise_check_count <= noise_check_count + 1;
+                    noise_check_count <= noise_check_count + 1; //шумы за 1 окно [не используется пока]
                     global_noise_count <= global_noise_count + 1;
                     noise_heard_in_window <= 1; // <-- флаг!
                 end 
