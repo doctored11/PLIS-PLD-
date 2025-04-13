@@ -88,7 +88,9 @@ module diodController_v1_tb;
         generate_noise(10000); 
         noise_valid = 0;
 
-        #150000;
+        #100000;
+		   generate_burst_noise(5, 20, 30);
+		#50000;
         generate_burst_noise(5, 20, 30);
         #151500;
 
