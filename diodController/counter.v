@@ -11,21 +11,23 @@ module counter(
 );
 
 
-parameter real DELAY_380mcrs = 380.0; 
+parameter real DELAY_350mcrs = 350.0; 
 parameter real DELAY_115mcrs = 115.0;
 parameter real DELAY_5mcrs   = 5.0;   
 parameter real CLK_FREQ_MHZ = 50.0; 
+parameter real DELAY_30mcrs = 30.0;
 
-localparam integer DELAY_380_TICKS = (DELAY_380mcrs * CLK_FREQ_MHZ);
+localparam integer DELAY_350_TICKS = (DELAY_350mcrs * CLK_FREQ_MHZ);
+localparam integer DELAY_30_TICKS = (DELAY_30mcrs * CLK_FREQ_MHZ);
 localparam integer DELAY_115_TICKS = (DELAY_115mcrs * CLK_FREQ_MHZ);
 localparam integer DELAY_5_TICKS   = (DELAY_5mcrs * CLK_FREQ_MHZ);
 
 parameter IDLE       = 0;
 parameter INIT       = 1;
-parameter INCREASE   = 2;//010
-parameter PAUSE      = 3;
-parameter CHECK_NOISE = 4; //100
-parameter CONFIRM    = 5;
+parameter TRANSMIT   = 2;
+parameter INCREASE   = 3;
+parameter PAUSE      = 4;
+parameter CHECK_NOISE = 5;
 parameter CALIBRATE  = 6;
 
 reg [2:0] state;
@@ -70,22 +72,33 @@ always @(posedge clk or posedge reset) begin
                 timer <= 0;
                 if (timer >= 3) begin  // задерживаем для сборки с spi --?
                     timer <= 0;
-                    state <= INCREASE;
-                    spi_start <= 0;
+                    state <= TRANSMIT;
+                  
                 end else begin
                     timer <= timer + 1;
                 end
             end
+				
+				 TRANSMIT: begin
+					  spi_start <= 1;
+					  if (timer >= DELAY_30_TICKS - 1) begin
+							spi_start <= 0;
+							timer <= 0;
+							state <= INCREASE;
+					  end else begin
+							timer <= timer + 1;
+					  end
+					end
                 
             INCREASE: begin 
-                spi_start <= 0;
-                if (timer >= DELAY_380_TICKS - 1) begin
+                
+                if (timer >= DELAY_350_TICKS - 1) begin
                     if (!prev_noise_heard_in_window) begin
                         voltage <= voltage + 1;
                     end
                     timer <= 0;
                     state <= PAUSE;
-                    spi_start <= 1; // тут еще подумать todo
+                  
                 end else begin
                     timer <= timer + 1;
                 end
@@ -117,7 +130,7 @@ always @(posedge clk or posedge reset) begin
                     timer <= timer + 1;
                 end else begin
                     timer <= 0;
-                    spi_start <= 1;
+                    //spi_start <= 1;
 
                     if (noise_heard_in_window) begin
                         window_count <= window_count + 1;
@@ -131,7 +144,7 @@ always @(posedge clk or posedge reset) begin
                         varu <= 1;
                         state <= CALIBRATE;
                     end else begin
-                        state <= INCREASE;
+                        state <= TRANSMIT;
                     end
                 end
             end

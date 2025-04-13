@@ -28,7 +28,8 @@ module diodController_v1_tb;
         .spi_start(spi_start),
         .varu(varu),
         .debug_window_count(debug_window_count),
-        .debug_state(debug_state)
+        .debug_state(debug_state),
+		    .debug_noise_valid_filter(debug_noise_valid_filter)
     );
 
     //always #10 clk = ~clk;//50Мгц - константы выставлены под эту частоту Todo - потом поменять для размера окон по ТЗ
@@ -70,6 +71,7 @@ module diodController_v1_tb;
         $display("Start simulation");
         $dumpfile("diodController_tb.vcd");
         $dumpvars(0, diodController_v1_tb);
+		  $dumpvars(1, diodController_v1_tb.uut.noise_valid_filter); 
 
         reset = 1;
         #20;

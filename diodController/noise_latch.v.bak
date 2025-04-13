@@ -1,0 +1,27 @@
+module noise_latch (
+    input wire clk,              // основной тактовый
+    input wire reset,            // синхронный сброс
+    input wire noise_in,         // короткий шум
+    output reg noise_out         // растянутый шум
+);
+
+    reg latched;
+
+    always @(posedge clk) begin
+        if (reset) begin
+            latched <= 0;
+        end else begin
+            // Захватываем шум
+            if (noise_in)
+                latched <= 1;
+            else if (noise_out)  // как только счетчик "забрал" шум — сбрасываем
+                latched <= 0;
+        end
+    end
+
+    always @(negedge clk) begin
+        // Передаём сигнал в counter на ближайшем отрицательном фронте
+        noise_out <= latched;
+    end
+
+endmodule

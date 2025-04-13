@@ -11,7 +11,8 @@ module diodController(
     output spi_start,
     output varu,
     output [1:0] debug_window_count,
-    output [2:0] debug_state   
+    output [2:0] debug_state ,
+		output 	 debug_noise_valid_filter
 );
 
     wire [7:0] voltage;
@@ -19,15 +20,23 @@ module diodController(
     wire varu_int;
     wire [1:0] debug_window_count_internal;
     wire [2:0] debug_state_internal; 
-
+		wire noise_valid_filter;
 	 
+	 
+	  noise_latch latch (
+        .clk(clk),
+        .reset(reset),
+        .noise_in(noise_valid),
+        .noise_out(noise_valid_filter)
+    );
 	 //?todo - отказаться от отдельного reset (сбрасывать по старту)
 	 //todo - старт к счетчику по блоку SPI при MISO =1
+assign debug_noise_valid_filter = noise_valid_filter;
     counter cnt (
         .clk(clk),
         .reset(reset),
         .start(start),
-        .noise_valid(noise_valid),
+        .noise_valid(noise_valid_filter),
 		  
         .voltage(voltage),
         .spi_start(spi_start_int),
