@@ -1,0 +1,50 @@
+module display_controller (
+    input clk,                   // Тактовый сигнал
+    input [15:0] data,           // 4 цифры BCD (по 4 бита на цифру)
+    output reg [7:0] segments,   // A–H, активны 0
+    output reg [3:0] digit_en    // Общие аноды, активны 1
+);
+
+    reg [1:0] current_digit = 0; // 0..3 — номер текущего индикатора
+    reg [15:0] refresh_counter = 0;
+
+    wire [3:0] digit_value;
+    reg [7:0] segment_pattern;
+
+    assign digit_value = data >> (current_digit * 4);
+
+    // Простая таблица для 7-сегментной цифры (A–G), H = 0
+    function [7:0] bcd_to_segments;
+        input [3:0] bcd;
+        begin
+            case (bcd)
+                4'd0: bcd_to_segments = 8'b11000000; // 0
+                4'd1: bcd_to_segments = 8'b11111001; // 1
+                4'd2: bcd_to_segments = 8'b10100100; // 2
+                4'd3: bcd_to_segments = 8'b10110000; // 3
+                4'd4: bcd_to_segments = 8'b10011001; // 4
+                4'd5: bcd_to_segments = 8'b10010010; // 5
+                4'd6: bcd_to_segments = 8'b10000010; // 6
+                4'd7: bcd_to_segments = 8'b11111000; // 7
+                4'd8: bcd_to_segments = 8'b10000000; // 8
+                4'd9: bcd_to_segments = 8'b10010000; // 9
+                default: bcd_to_segments = 8'b11111111; // пусто
+            endcase
+        end
+    endfunction
+
+    always @(posedge clk) begin
+        refresh_counter <= refresh_counter + 1;
+
+        if (refresh_counter == 0) begin
+            current_digit <= current_digit + 1;
+
+            segment_pattern <= bcd_to_segments(digit_value);
+            segments <= segment_pattern;
+
+            digit_en <= 4'b0000;
+            digit_en[current_digit] <= 1'b1;  // включаем текущий анод
+        end
+    end
+
+endmodule

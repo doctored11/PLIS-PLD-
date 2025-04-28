@@ -1,0 +1,23 @@
+module decimal_counter (
+    input wire clk,           // тактовый сигнал
+    input wire reset,         // сброс
+    output reg [15:0] count   // 16-битный счётчик (от 0 до 9999)
+);
+
+    // Инициализация счётчика
+    initial begin
+        count = 16'b0000_0000_0000_0000;  // начальное значение счётчика
+    end
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            count <= 16'b0000_0000_0000_0000;  // сброс счётчика при активации reset
+        end else begin
+            if (count < 16'd9999) begin
+                count <= count + 1;  // увеличиваем счётчик
+            end else begin
+                count <= 16'b0000_0000_0000_0000;  // если достигли 9999, сбрасываем в 0
+            end
+        end
+    end
+endmodule

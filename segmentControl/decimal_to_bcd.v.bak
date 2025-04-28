@@ -1,0 +1,16 @@
+module decimal_to_bcd (
+    input wire [15:0] decimal,     // 16-битное десятичное число
+    output reg [3:0] bcd_0,        // младшая цифра
+    output reg [3:0] bcd_1,        // вторая цифра
+    output reg [3:0] bcd_2,        // третья цифра
+    output reg [3:0] bcd_3         // старшая цифра
+);
+
+    always @(*) begin
+        // Преобразование в BCD
+        bcd_3 = decimal / 1000;  // самая старшая цифра
+        bcd_2 = (decimal % 1000) / 100;  // вторая цифра
+        bcd_1 = (decimal % 100) / 10;    // третья цифра
+        bcd_0 = decimal % 10;            // младшая цифра
+    end
+endmodule
